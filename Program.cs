@@ -1,5 +1,4 @@
-﻿using DataStructureAndAlgorithm.Sorting;
-using System.Collections;
+﻿using DataStructureAndAlgorithm.LeetCode.arrays;
 
 namespace DataStructureAndAlgorithm
 {
@@ -7,18 +6,7 @@ namespace DataStructureAndAlgorithm
     {
         static void Main(string[] args)
         {
-            var numbers = new Stack<int>();
-            numbers.Push(5);
-            numbers.Push(4);
-            numbers.Push(3);
-            numbers.Push(2);
-            numbers.Push(1);
-            var towerOfHanoi = new TowerOfHanoi<int>(numbers);
-            towerOfHanoi.StackAuxilliary();
-            foreach (var number in towerOfHanoi.To)
-            {
-                Console.WriteLine(number);
-            }
+            Console.WriteLine(StockIV_188.MaxProfit(new int[] { 3, 2, 6, 5, 0, 3 },2));
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         // Alogorithm for selection sort
         //. The collection is divided into two parts; sorted and unsorted.
-        //.  The smallest element for the sorted part is used to replace the first element of the unsorted part.
+        //.  The smallest element for the unsorted part is used to replace the first element of the unsorted part and the length of the sorted path increases.
         // The above is continuosly done until the collection is sorted.
 
         private int[] Numbers { get; set; }
@@ -20,14 +20,22 @@
 
             for (int i = 0; i < numbersLength; i++)
             {
-                var reducedNumbers = Numbers.Skip(i).ToArray();
-                var minValue = reducedNumbers.Min();
-                var minValueIndex = reducedNumbers.ToList()
-                                                  .FindIndex(number=> number == minValue);
-                var firstValue = reducedNumbers[0];
-                reducedNumbers[minValueIndex] = firstValue;
-                reducedNumbers[0] = minValue;
-                reducedNumbers.CopyTo(Numbers, i);
+                var smallestDigitIndex = i;
+
+                for (int j = (i + 1); j < numbersLength; j++)
+                {
+                    if (Numbers[j] < Numbers[smallestDigitIndex])
+                    {
+                        smallestDigitIndex = j;
+                    }
+                }
+
+                if (i != smallestDigitIndex)
+                {
+                    var temp = Numbers[smallestDigitIndex];
+                    Numbers[smallestDigitIndex] = Numbers[i];
+                    Numbers[i] = temp;
+                }
             }
 
             foreach (var number in Numbers)

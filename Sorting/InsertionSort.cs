@@ -25,14 +25,12 @@
 
                 while ( j > 0 && sizeIndex > 0)
                 {
-                    sizeIndex = Numbers[j - 1].CompareTo(numToSort);
+                    sizeIndex = Numbers[j - 1].CompareTo(Numbers[j]);
                     if (sizeIndex > 0)
-                    {   var numInSort = Numbers[j - 1];
-                        Numbers[j] = numInSort;
-                        Numbers[j - 1] = numToSort;
+                    {   var temp = Numbers[j - 1];
+                        Numbers[j] = temp;
+                        Numbers[--j] = numToSort;
                     }
-
-                    j--;
                 }
             }
 

@@ -1,6 +1,6 @@
 ﻿namespace DataStructureAndAlgorithm.Sorting
 {
-    public class QuickSort<T> where T:IComparable
+    public class QuickSort
     {
         // Algorithm
         //1. Pick some value such as the first or middle element of the array as a pivot.
@@ -8,58 +8,37 @@
         //3. The set of values before the pivot forms the lower sub-array and the set after it forms the higher sub-array.
         //4. Each of the sub-arrays are ordered recursively by following steps 1 and 2.
 
-        public T[] Numbers { get; set; }
-
-        public QuickSort(T[] _numbers)
+        static public void Sort(int[] arr,int low,int high)
         {
-            Numbers = _numbers;
-        }
-
-        public void SortInAscending()
-        {
-            // Pick the first in the array as the initial pivot.
-            var pivotIndex = 0;
-            ReArrangeArray(pivotIndex);
-        }
-
-        private void ReArrangeArray(int pivotIndex)
-        {
-            var wasSwaped = true;
-            var loopStart = pivotIndex;
-            while (wasSwaped)
+            if (low < high)
             {
-                var swapElement = Numbers[pivotIndex];
-                var swapElementindex = pivotIndex;
-                wasSwaped = false;
-                for (int i = loopStart; i < Numbers.Length; i++)
-                {
-                    var sizeIndex = Numbers[i].CompareTo(swapElement);
-                    var shouldSwap = sizeIndex <= 0 && i != pivotIndex;
-                    if (pivotIndex - loopStart > 1 && Numbers[i].CompareTo(Numbers[pivotIndex]) > 0)
-                    {
-                        shouldSwap = true;
-                    }
-                    
-                    if (shouldSwap)
-                    {
-                        swapElement = Numbers[i];
-                        swapElementindex = i;
-                        wasSwaped = true;
-                    }
-                }
+                int pi = Partition(arr, low, high);
+                Sort(arr,low,pi - 1);
+                Sort(arr,pi + 1,high);
+            }
+        }
 
-                if (wasSwaped)
+        private static int Partition(int[] arr, int low, int high)
+        {
+           var pivot = arr[high];
+           var i = low - 1;
+            for (int j = low; j <= high - 1; j++)
+            {
+                if (arr[j] < pivot)
                 {
-                    var pivot = Numbers[pivotIndex];
-                    Numbers[pivotIndex] = swapElement;
-                    Numbers[swapElementindex] = pivot;
-                    pivotIndex = swapElementindex;
+                    i++;
+                    Swap(arr, i, j);
                 }
             }
+            Swap(arr, i + 1, high);
+            return i + 1;
+        }
 
-            if (pivotIndex != (Numbers.Length - 1))
-                ReArrangeArray(pivotIndex);
-
+        private static void Swap(int[] arr, int i, int j)
+        {
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
 }

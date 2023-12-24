@@ -25,9 +25,9 @@
 
             if (DegreeOfFreedom == 0 && repititionCount > 0)
             {
-                // assume one of the songs is the reapeated one.
+                //1.  assume one of the songs is the reapeated one.
 
-                // 1. Possible playlists when reapeated the songs won't be consecutive.
+                // 1a. Possible playlists when reapeated songs won't be consecutive.
 
                 var othersCount = SongsCount - repititionCount;
                 var othersOrderingCount = Factorial(othersCount);
@@ -41,11 +41,16 @@
 
                 var playList1 =  (othersOrderingCount * repeatedSongOrderingCount) / divisor;
 
-                // 2. Possible playlists when the songs would be consecutive.
+                // 1b. Possible playlists when the songs would be consecutive.
+
                 var playList2 = othersOrderingCount * repeatedsongOptions;
 
-
                 possiblePlaylistCount = (playList1 + playList2) * (othersCount + 1);
+
+                // 2. Repeated playlist is various songs combined in various ratios
+
+                var maxItemInCombination = (repititionCount > SongsCount)? SongsCount : repititionCount;
+
             }
             else if(DegreeOfFreedom > 0)
             {
